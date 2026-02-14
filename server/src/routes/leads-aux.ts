@@ -1,8 +1,7 @@
 import { Router } from 'express';
-import { PrismaClient } from '@prisma/client';
+import prisma from '../prisma.js';
 
 const router = Router();
-const prisma = new PrismaClient();
 
 // PATCH /api/leads/:id/do-not-contact - Mark lead as do-not-contact
 router.patch('/:id/do-not-contact', async (req, res) => {

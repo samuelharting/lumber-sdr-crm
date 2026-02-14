@@ -1,10 +1,9 @@
 import { Router } from 'express';
-import { PrismaClient } from '@prisma/client';
-import { CreateActivityRequest, ActivityType, ActivityResult } from '../../shared/activityTypes.js';
+import prisma from '../prisma.js';
+import { CreateActivityRequest, ActivityType, ActivityResult } from '@shared/activityTypes';
 import { evaluateAutomation } from '../automation/rules.js';
 
 const router = Router();
-const prisma = new PrismaClient();
 
 // POST /api/activities - Create activity and apply automation
 router.post('/', async (req, res) => {

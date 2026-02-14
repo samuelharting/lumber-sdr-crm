@@ -2,9 +2,9 @@ import { Request, Response, NextFunction } from 'express';
 
 export function authenticateApiKey(req: Request, res: Response, next: NextFunction) {
   // Allow health endpoint without key
-  if (req.path === '/api/health') {
-    return next();
-  }
+if (req.originalUrl?.startsWith('/api/health')) {
+  return next();
+}
 
   // Allow web UI in development mode
   const origin = req.get('origin');

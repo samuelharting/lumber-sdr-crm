@@ -1,16 +1,8 @@
 import { Router } from 'express';
-import { PrismaClient } from '@prisma/client';
+import prisma from '../prisma.js';
 import { scoreLead } from '../scoring/scoreLead.js';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
-import dotenv from 'dotenv';
-
-dotenv.config();
-
-const DATABASE_URL = process.env.DATABASE_URL || 'file:./data/database.db';
-const prisma = new PrismaClient({
-  datasourceUrl: DATABASE_URL,
-});
 
 const router = Router();
 

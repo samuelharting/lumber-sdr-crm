@@ -1,4 +1,4 @@
-import { ActivityType, ActivityResult, LeadStage } from '../../shared/activityTypes.js';
+import { ActivityType, ActivityResult, LeadStage } from '@shared/activityTypes';
 import { calculateNextActionDate } from '../utils/dateUtils.js';
 
 export interface AutomationData {

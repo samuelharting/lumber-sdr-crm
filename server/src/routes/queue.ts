@@ -1,9 +1,8 @@
 import { Router } from 'express';
-import { PrismaClient } from '@prisma/client';
-import { LeadStage } from '../../../shared/activityTypes.js';
+import prisma from '../prisma.js';
+import { LeadStage } from '@shared/activityTypes';
 
 const router = Router();
-const prisma = new PrismaClient();
 
 function safeParseJson(jsonStr: string | null): string[] {
   if (!jsonStr) return [];
