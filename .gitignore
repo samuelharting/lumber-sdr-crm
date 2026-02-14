@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+
+# Environment (secrets)
+.env
+.env.local
+.env.*.local
+
+# Build outputs
+dist/
+dist-ssr/
+*.local
+
+# Database (optional - regenerate with seed)
+server/data/database.db
+
+# Logs and cache
+*.log
+.cache/
+.vscode/
+.idea/
+.DS_Store

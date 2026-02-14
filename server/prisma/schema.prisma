@@ -1,0 +1,109 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+enum DoesPublicWorks {
+  yes
+  no
+  unknown
+}
+
+enum UnionLikely {
+  yes
+  no
+  unknown
+}
+
+enum MultiJobsite {
+  yes
+  no
+  unknown
+}
+
+enum LeadStage {
+  NEW
+  RESEARCHED
+  QUEUED
+  ATTEMPTING
+  WORKING
+  ENGAGED
+  MEETING_SET
+  NURTURE
+  CLOSED_LOST
+}
+
+enum ActivityType {
+  CALL
+  EMAIL
+  VOICEMAIL
+  LINKEDIN
+  NOTE
+}
+
+model Lead {
+  id                String        @id @default(uuid())
+  companyName       String
+  website           String?
+  industryTrade     String?
+  locations         String?
+  employeeEstimate  Int?
+  doesPublicWorks   DoesPublicWorks @default(unknown)
+  unionLikely       UnionLikely   @default(unknown)
+  multiJobsite      MultiJobsite  @default(unknown)
+  currentStack      String?
+  painSignals       String?
+  score             Int           @default(0)
+  scoreReasons      String?
+  recommendedAngle  String?
+  stage             LeadStage     @default(NEW)
+  status            String?
+  nextAction        String?
+  nextActionDate    DateTime?
+  doNotContact      Boolean       @default(false)
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+  
+  contacts          Contact[]
+  activities        Activity[]
+
+  @@map("leads")
+}
+
+model Contact {
+  id          String  @id @default(uuid())
+  name        String
+  title       String?
+  email       String?
+  phone       String?
+  linkedinUrl String?
+  isPrimary   Boolean @default(false)
+
+  leadId String
+  lead   Lead @relation(fields: [leadId], references: [id], onDelete: Cascade)
+
+  activities Activity[]
+
+  @@map("contacts")
+}
+
+model Activity {
+  id        String     @id @default(uuid())
+  type      ActivityType
+  result    String?
+  notes     String?
+  timestamp DateTime   @default(now())
+
+  leadId String
+  lead   Lead @relation(fields: [leadId], references: [id], onDelete: Cascade)
+
+  contactId String?
+  contact   Contact? @relation(fields: [contactId], references: [id], onDelete: SetNull)
+
+  @@index([leadId])
+  @@index([timestamp])
+  @@map("activities")
+}
