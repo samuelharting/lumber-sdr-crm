@@ -2,6 +2,35 @@
 
 A local-first mini CRM system for managing construction leads with automated follow-up based on activity logging and **Jarvis/OpenClaw Ready API surface**. Built with React, Node.js, Express, and SQLite with complete activity tracking and lead stage automation.
 
+## Fresh Install (Clone & Run on New Machine)
+
+```bash
+# Clone the repo
+git clone https://github.com/samuelharting/lumber-sdr-crm.git
+cd lumber-sdr-crm
+
+# Backend
+cp .env.example server/.env
+# Edit server/.env and set API_KEY, DATABASE_URL, PORT
+
+cd server
+npm install
+npm run db:push
+npm run db:seed
+npm run dev
+# Backend runs on http://127.0.0.1:3030
+
+# Frontend (new terminal)
+cd web
+cp ../.env.example .env
+# Edit .env and set VITE_API_URL (e.g. http://127.0.0.1:3030)
+npm install
+npm run dev
+# Frontend runs on http://127.0.0.1:5173
+```
+
+Open http://127.0.0.1:5173/ for the dashboard.
+
 ## 🚀 What's New - Today Queue & Jarvis Integration
 
 ✅ **API Key Authentication** - Secure agent access to API
