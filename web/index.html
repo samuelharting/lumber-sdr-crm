@@ -5,10 +5,17 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Lumber SDR CRM</title>
-    <script src="https://cdn.tailwindcss.com"></script>
   </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.ts"></script>
+  <body style="margin:0;min-height:100vh;background:#f8fafc;color:#1e293b;font-family:system-ui,sans-serif;">
+    <div id="app">
+      <div style="display:flex;align-items:center;justify-content:center;min-height:100vh;padding:1rem;">
+        <div style="text-align:center;">
+          <div style="width:40px;height:40px;border:3px solid #e2e8f0;border-top-color:#FF6B35;border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 1rem;"></div>
+          <p style="font-size:0.875rem;color:#64748b;">Loading Lumber CRM…</p>
+        </div>
+      </div>
+    </div>
+    <style>@keyframes spin{to{transform:rotate(360deg)}}</style>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

@@ -60,3 +60,28 @@ export interface CreateActivityRequest {
   notes?: string;
   timestamp?: string;
 }
+
+export type ActivityResponse = Activity;
+
+export const ActivityType = {
+  CALL: 'call',
+  EMAIL: 'email',
+  VOICEMAIL: 'voicemail',
+  LINKEDIN: 'linkedin',
+  NOTE: 'note',
+} as const;
+export type ActivityType = (typeof ActivityType)[keyof typeof ActivityType];
+
+export const ActivityResult = {
+  NO_ANSWER: 'no answer',
+  LEFT_VM: 'left vm',
+  CONNECTED: 'connected',
+  SENT: 'sent',
+  REPLIED: 'replied',
+  BOUNCED: 'bounced',
+  NOT_NOW: 'not now',
+  WRONG_PERSON: 'wrong person',
+  MEETING_SET: 'meeting set',
+  DO_NOT_CONTACT: 'do not contact',
+} as const;
+export type ActivityResult = (typeof ActivityResult)[keyof typeof ActivityResult];
