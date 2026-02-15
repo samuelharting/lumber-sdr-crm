@@ -6,16 +6,25 @@ import { dirname, join } from 'path';
 
 const router = Router();
 
+// Test endpoint
+router.get('/test', (req, res) => {
+  console.log('DEBUG: Test endpoint hit');
+  res.json({ message: 'Test endpoint works', timestamp: new Date().toISOString() });
+});
+
 // GET /api/leads - Get all leads
 router.get('/', async (req, res) => {
   try {
+    console.log('DEBUG: Fetching leads from database...');
     const leads = await prisma.lead.findMany({
       orderBy: { createdAt: 'desc' }
     });
+    console.log(`DEBUG: Found ${leads.length} leads`);
     res.json(leads);
   } catch (error) {
-    console.error('Error fetching leads:', error);
-    res.status(500).json({ error: 'Failed to fetch leads' });
+    console.error('ERROR fetching leads:', error);
+    console.error('Full error details:', JSON.stringify(error, null, 2));
+    res.status(500).json({ error: 'Failed to fetch leads', details: error.message });
   }
 });
 

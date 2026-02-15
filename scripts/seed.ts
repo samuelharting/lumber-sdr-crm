@@ -1,6 +1,15 @@
 import { PrismaClient } from '@prisma/client';
+import { PrismaBetterSqlite3 } from '@prisma/adapter-better-sqlite3';
+import dotenv from 'dotenv';
 
-const prisma = new PrismaClient();
+dotenv.config({ path: '../server/.env' });
+
+// For Prisma 7.4.0 with SQLite
+const adapter = new PrismaBetterSqlite3({
+  url: process.env.DATABASE_URL || 'file:./data/database.db',
+});
+
+const prisma = new PrismaClient({ adapter });
 
 async function main() {
   // Create fake leads
